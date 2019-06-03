@@ -14,15 +14,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DataFrames extends javax.swing.JFrame {
 
-   
+
 
     /**
      * Creates new form DataFrames
      * @throws java.lang.Exception
      */
-    
+
         private DBManager database;         // DBManager object, to connect to database, execute database methods
-        
+
         // DefaultTableModel objects - one per database table, used to create a JTable for each database table
         private DefaultTableModel propDTM = null;
         private DefaultTableModel apptDTM = null;
@@ -30,13 +30,13 @@ public class DataFrames extends javax.swing.JFrame {
         private DefaultTableModel muniDTM = null;
         private DefaultTableModel schoolDTM = null;
         private DefaultTableModel agentDTM = null;
-        
-        private String [] listAgents;       // array to hold list of agents in database
-        private String [] listMLS;          // array to hold list of MLS numbers in database
+
+        private String[] listAgents;       // array to hold list of agents in database
+        private String[] listMLS;          // array to hold list of MLS numbers in database
         private String[] listCounties;      // array to hold list of County IDs in database
         private String[] listMunis;         // array to hold list of Municipality IDs in database
         private String[] listSDistricts;    // array to hold list of School Districts in database
-        
+
         // Strings to hold "SELECT *" query for each database table
         // used to create each table, populate the "list array" fields
         private String queryProperty = "SELECT * FROM PROPERTY";
@@ -45,14 +45,14 @@ public class DataFrames extends javax.swing.JFrame {
         private String queryMuni = "SELECT * FROM MUNICIPALITY";
         private String querySD = "SELECT * FROM SCHOOL_DISTRICT";
         private String queryAgent = "SELECT * FROM LISTING_AGENT";
-        
+
     public DataFrames() throws Exception{
-        
+
         initComponents();
-        
+
         // create new DBManager object, to use database methods
         database = new DBManager();
-        
+
         // call the createTable method to create all of the JTables
         createTable(queryProperty, propDTM, Property);
         createTable(queryAppt, apptDTM, Appointment);
@@ -60,10 +60,10 @@ public class DataFrames extends javax.swing.JFrame {
         createTable(queryMuni, muniDTM, Municipality);
         createTable(querySD, schoolDTM, SchoolDistrict);
         createTable(queryAgent, agentDTM, ListingAgent);
-        
+
         // call the createComboBoxes method to create the comboBoxes in the GUI
         createComboBoxes();
-        
+
     }
 
     /**
@@ -1376,9 +1376,9 @@ public class DataFrames extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     /**
-     * createTable method populates a JTable object using the data of table 
+     * createTable method populates a JTable object using the data of table
      * from a SQL Server database
      * @param query SQL query to return required data from the database table
      * @param dtmObj DefaultTableModel object for the specified table
@@ -1387,13 +1387,13 @@ public class DataFrames extends javax.swing.JFrame {
     private void createTable(String query, DefaultTableModel dtmObj, JTable jtableObj)
     {
         // call the getTableData method in the DBManager class
-        // this method returns a DefaultTableModel object that can be used to build a JTable 
+        // this method returns a DefaultTableModel object that can be used to build a JTable
         dtmObj = database.getTableData(query);
-        
+
         // pass the DefaultTableModel object to setModel method to populate the relevant JTable
         jtableObj.setModel(dtmObj);
     }
-    
+
     /**
      * createComboBoxes method populates the combo boxes in the DataFrames GUI
      */
@@ -1402,46 +1402,46 @@ public class DataFrames extends javax.swing.JFrame {
         // call the getListTableID method in the DBManager class, passing the "SELECT *" query for the listing_agent table
         // to populate the array listAgents so that it holds the list of agents in the database
         listAgents = database.getListTableID(queryAgent);
-        
-        // remove all items from combo box new Agentcbo, then populate the combo box 
+
+        // remove all items from combo box new Agentcbo, then populate the combo box
         // using a loop with the list of agents from the listAgents array
         newAgentcbo.removeAllItems();
         for (int i = 0; i < listAgents.length; i++)
         {
             newAgentcbo.addItem(listAgents[i]);
         }
-        
+
         // repeat for newPropAgentCBO combo box
         newPropAgentCBO.removeAllItems();
         for (int i = 0; i<listAgents.length;i++)
             newPropAgentCBO.addItem(listAgents[i]);
-        
+
         // populate the array listMLS with values of MLS numbers from the database
         listMLS = database.getListTableID(queryProperty);
-        
+
         // remove all items from combo box mlsNewPricecbo
         // then populate the combo box, using a loop, with the list of MLS numbers in the listMLS array
         mlsNewPricecbo.removeAllItems();
         for (int i = 0; i<listMLS.length; i++)
             mlsNewPricecbo.addItem(listMLS[i]);
-        
+
         // repeat for mlsNewAgent combo box
         mlsNewAgentcbo.removeAllItems();
         for (int i = 0; i<listMLS.length; i++)
             mlsNewAgentcbo.addItem(listMLS[i]);
-        
+
         // remove all items from combo box mlsToDeletecbo
         // then populate the combo box, using a loop, with the list of MLS numbers in the listMLS array
         mlsToDeletecbo.removeAllItems();
             for (String listMLS1 : listMLS) {
                 mlsToDeletecbo.addItem(listMLS1);
             }
-        
+
         // populate mlsApptField combo box with MLS numbers
         mlsApptField.removeAllItems();
         for (int i = 0; i<listMLS.length; i++)
             mlsApptField.addItem(listMLS[i]);
-        
+
         // populate mlsPropTax combo box with MLS numbers
         mlsPropTaxCBO.removeAllItems();
         for (String listMLS1 : listMLS)
@@ -1449,24 +1449,24 @@ public class DataFrames extends javax.swing.JFrame {
 
         // using getListTableID method, populate the array listCounties with counties from the database
         listCounties = database.getListTableID(queryCounty);
-        
+
         // clear contents of combo box countyCBox
         // populate combo box with values from listCounties array
         countyCBox.removeAllItems();
         for (int i = 0; i<listCounties.length; i++)
             countyCBox.addItem(listCounties[i]);
-        
+
         // populate the array listMunis with values of municipalites from the database
         listMunis = database.getListTableID(queryMuni);
-        
+
         // populate the combo box muniCBox
         muniCBox.removeAllItems();
         for (int i = 0; i<listMunis.length; i++)
             muniCBox.addItem(listMunis[i]);
-        
+
         // populate the listSDistricts array using getListTableID method
         listSDistricts = database.getListTableID(querySD);
-        
+
         // populate the sdistrictCBox combo box
         sdistrictCBox.removeAllItems();
         for (int i =0; i<listSDistricts.length; i++)
@@ -1474,110 +1474,110 @@ public class DataFrames extends javax.swing.JFrame {
 
     }
     /**
-     * insertPropertyActionPerformed method executes when 
+     * insertPropertyActionPerformed method executes when
      * Insert Property button on Property tab is clicked
-     * @param evt 
+     * @param evt
      */
     private void insertPropertyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertPropertyActionPerformed
         try{
             // get text from all of the text fields on the insert property form
         //mlsNum holds the property's MLS number
         String mlsNum = mlsfield.getText();
-        
+
         // listed price, check to make sure not null, then
         // convert text field value to double
         double listNum = 0;
         if (pricefield.getText() != null && pricefield.getText().length() > 0)
             listNum = Double.parseDouble(pricefield.getText());
-        
+
         // assess price of the property, again must check that field is not null
         // before converting to double
         double assessPriceNum = 0;
         if (assessfield.getText() != null && assessfield.getText().length()>0)
             assessPriceNum = Double.parseDouble(assessfield.getText());
-        
+
         // property address
         String address = addressfield.getText();
-        
+
         // property city
         String city = cityfield.getText();
-        
+
         // assign selected items from combo boxes for county, municipality
         // and school district fields
         String selectCounty = countyCBox.getSelectedItem().toString();
         String selectMunicipality = muniCBox.getSelectedItem().toString();
         String selectSDistrict = sdistrictCBox.getSelectedItem().toString();
-        
+
         // number of property's bedrooms
         int bedrooms = 0;
         if (bedroomsfield.getText() !=null && bedroomsfield.getText().length()>0)
-            bedrooms = Integer.parseInt(bedroomsfield.getText()); 
-        
+            bedrooms = Integer.parseInt(bedroomsfield.getText());
+
         // number of property's bathrooms
         double bathrooms =0;
         if (bathroomsfield.getText() !=null && bathroomsfield.getText().length()>0)
-            bathrooms = Double.parseDouble(bathroomsfield.getText()); 
-        
+            bathrooms = Double.parseDouble(bathroomsfield.getText());
+
         // square footage of property
         int sqrft = 0;
         if (sqrFtfield.getText() != null && sqrFtfield.getText().length()>0)
-            sqrft = Integer.parseInt(sqrFtfield.getText());  
-        
+            sqrft = Integer.parseInt(sqrFtfield.getText());
+
         // date that the property listed on the market
         String dateOnMkt = dateText.getText();
         // convert the text field into a sql.Date object
         java.sql.Date sqlDate = java.sql.Date.valueOf(dateOnMkt);
-        
+
         // selected agent from combo box of agents
         String selectAgent = newPropAgentCBO.getSelectedItem().toString();
-        
+
         // callInsertProperty method to insert a new property into the property table
-        database.callInsertProperty(mlsNum, listNum, assessPriceNum, address, city, selectCounty, 
+        database.callInsertProperty(mlsNum, listNum, assessPriceNum, address, city, selectCounty,
                 selectMunicipality, selectSDistrict, bedrooms,
                 bathrooms, sqrft, sqlDate, selectAgent);
 
         }
-        
+
         catch (Exception e) {
             e.printStackTrace();
         }
-                
+
     }//GEN-LAST:event_insertPropertyActionPerformed
     /**
      * insertApptActionPerformed inserts a new appointment into the appointment table,
      * executes when "Insert New Appointment" button is clicked
-     * @param evt 
+     * @param evt
      */
     private void insertApptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertApptActionPerformed
         try {
-            
+
             // get values from the different text fields on the insert appointment form
-            
+
             // format date from text field into a java.sql.Date
             String apptDate = apptDateField.getText();
             java.sql.Date sqlapptDate = java.sql.Date.valueOf(apptDate);
-            
-            
+
+
             // format time from text field into a java.sql.Time
             String time = apptTimeField.getText();
             DateFormat formatter = new SimpleDateFormat("HH:mm");
             java.sql.Time sqlTimeValue = new java.sql.Time(formatter.parse(time).getTime());
-            
+
             // MLS number selected from relevant combo box
             String mlsAppt = mlsApptField.getSelectedItem().toString();
-            
+
             // duration of appointment, converted to an integer
             int duration = 0;
             if (durationField.getText() !=null)
                 duration = Integer.parseInt(durationField.getText());
-            
+
             // get type of appointment from text field
             String type = typeField.getText();
-            
+
             // callInsertAppt method from DBManager class
             // this method executes a Stored Procedure to insert a new appointment into the appointment table
             database.callInsertAppt(sqlapptDate, sqlTimeValue, mlsAppt, duration, type);
-        } 
+        }
         catch (Exception e) {
             e.printStackTrace();
         }
@@ -1585,18 +1585,18 @@ public class DataFrames extends javax.swing.JFrame {
 /**
  * insertCountyActionPerformed method inserts a new county into county table.
  * It executes when the "Insert County" button is pressed.
- * @param evt 
+ * @param evt
  */
     private void insertCountyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertCountyActionPerformed
         try{
-            
+
             // get text fields from the county form and store in variables
             String countyID = countyIDField.getText();
             String countyName = countyNameField.getText();
             double countyTax = 0;
             if (countyTaxField.getText()!=null)
                 countyTax = Double.parseDouble(countyTaxField.getText());
-            
+
             // use callInsertCounty method from DBManager class to insert a new row
             // into the county table
             database.callInsertCounty(countyID, countyName,countyTax);
@@ -1604,21 +1604,21 @@ public class DataFrames extends javax.swing.JFrame {
         catch(Exception e){
             e.printStackTrace();
         }
-        
-        
+
+
     }//GEN-LAST:event_insertCountyActionPerformed
-    
+
     // The updateMuniTaxActionPerformed method updates a municipality's tax rate
     // when the "Update Municipality Tax" button is pushed.
     private void updateMuniTaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMuniTaxActionPerformed
         try{
-            
+
             // store data from Municipality form text fields into variables
             double muniTax = 0.0;
             if (muniTaxField.getText()!=null)
                 muniTax = Double.parseDouble(muniTaxField.getText());
             String muniID = muniIDField.getText();
-            
+
             // use callUpdateMuniTax from DBManager class to update the tax rate,
             // passing the values from the text fields to the method
             database.callUpdateMuniTax(muniTax, muniID);
@@ -1626,15 +1626,15 @@ public class DataFrames extends javax.swing.JFrame {
         catch(Exception e){
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_updateMuniTaxActionPerformed
-    
+
     /**
-     * The insertSDActionPerformed inserts a new school district into the 
+     * The insertSDActionPerformed inserts a new school district into the
      * school_district table when "Insert School District" button is clicked.
-     * @param evt 
+     * @param evt
      */
-  
+
     private void insertSDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertSDActionPerformed
         try{
             // store values from school district form fields in variables
@@ -1643,41 +1643,41 @@ public class DataFrames extends javax.swing.JFrame {
             double tax = 0.0;
             if (schoolDistrictTaxField.getText() != null)
                 tax = Double.parseDouble(schoolDistrictTaxField.getText());
-            
+
             // use DBManager class method callInsertSDistrict to insert the
             // new row into the school_district table
             database.callInsertSDistrict(id, name, tax);
-            
+
             }
         catch(Exception e){
             e.printStackTrace();
-        }        
+        }
 
     }//GEN-LAST:event_insertSDActionPerformed
-    
+
     /**
-     * The updateAgentActionPerformed method updates the listing agent for a 
+     * The updateAgentActionPerformed method updates the listing agent for a
      * particular property when the "Update Listing Agent" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void updateAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAgentActionPerformed
         try{
             // store selected values from the two combo boxes into variables
             String selectAgent = newAgentcbo.getSelectedItem().toString();
             String selectMLS = mlsNewAgentcbo.getSelectedItem().toString();
-            
+
             // use callUpdateAgent method from DBManager class to perform the update
             database.callUpdateAgent(selectAgent, selectMLS);
-            
+
         }
         catch(Exception e){
             e.printStackTrace();
         }
     }//GEN-LAST:event_updateAgentActionPerformed
     /**
-     * The updatePriceActionPerformed method updates the list price for a 
+     * The updatePriceActionPerformed method updates the list price for a
      * property when the "Update Price" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void updatePriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePriceActionPerformed
         try{
@@ -1685,29 +1685,29 @@ public class DataFrames extends javax.swing.JFrame {
             double newPrice = 0;
             if (newPricefield.getText()!=null)
                 newPrice = Double.parseDouble(newPricefield.getText());
-                
+
             String selectMLS = mlsNewPricecbo.getSelectedItem().toString();
-            
+
             // use DBManager callUpdatePrice method to perform the price update
             // in the database
             database.callUpdatePrice(newPrice, selectMLS);
-            
+
         }
         catch(Exception e){
             e.printStackTrace();
         }
     }//GEN-LAST:event_updatePriceActionPerformed
     /**
-     * The deletePropertyActionPerformed deletes a property from the table 
+     * The deletePropertyActionPerformed deletes a property from the table
      * when the "Delete Property" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void deletePropertyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePropertyActionPerformed
         try{
-            // convert selected value from combo box to string and store in 
+            // convert selected value from combo box to string and store in
             // selectMLS variable
             String selectMLS = mlsToDeletecbo.getSelectedItem().toString();
-            
+
             // pass selectMLS to callDeleteProp method to delete the property
             // from the database
             database.callDeleteProp(selectMLS);
@@ -1716,40 +1716,40 @@ public class DataFrames extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_deletePropertyActionPerformed
-    
+
     /**
      * The updateApptTimebuttonActionPerformed updates the time of an appointment
      * when the "New Appt Time" button is clicked.
-     * @param evt 
+     * @param evt
      */
-    
+
     private void updateApptTimebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateApptTimebuttonActionPerformed
         try{
-            // get values from form fields                         
+            // get values from form fields
             String time = apptTimeField.getText();
-            
+
              // convert time from text field into java.sql.Time object
             DateFormat formatter = new SimpleDateFormat("HH:mm");
             java.sql.Time sqlTimeValue = new java.sql.Time(formatter.parse(time).getTime());
-            
+
             int id = 0;
             if (apptIDUpdateTime.getText() !=null)
                 id = Integer.parseInt(apptIDUpdateTime.getText());
-            
+
             // use DBManager class method callUpdateApptTime to execute the update
             database.callUpdateApptTime(sqlTimeValue, id);
         }
         catch(Exception e){
             e.printStackTrace();
         }
-        
-                
+
+
     }//GEN-LAST:event_updateApptTimebuttonActionPerformed
-    
+
     /**
      * The updateApptTimeDatebuttonActionPerformed method updates the date and
      * time of an appointment when the "New Appt Date & Time" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void updateApptTimeDatebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateApptTimeDatebuttonActionPerformed
          try{
@@ -1757,16 +1757,16 @@ public class DataFrames extends javax.swing.JFrame {
             // convert date into java.sql.Date object
             String apptDate = apptDateField.getText();
             java.sql.Date sqlapptDate = java.sql.Date.valueOf(apptDate);
-            
-            // convert time to java.sql.Time object 
+
+            // convert time to java.sql.Time object
             String time = apptTimeField.getText();
             DateFormat formatter = new SimpleDateFormat("HH:mm");
             java.sql.Time sqlTimeValue = new java.sql.Time(formatter.parse(time).getTime());
-            
+
             int id = 0;
             if (apptIDUpdateDT.getText() !=null)
                 id = Integer.parseInt(apptIDUpdateDT.getText());
-            
+
             // call DBManager class method callUpdateApptDateTime to perform the
             // update
             database.callUpdateApptDateTime(sqlapptDate, sqlTimeValue, id);
@@ -1777,16 +1777,16 @@ public class DataFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_updateApptTimeDatebuttonActionPerformed
     /**
      * The deleteApptActionPerformed deletes an appointment from the
-     * appointment table when the "Delete Appt" button is clicked. 
-     * @param evt 
+     * appointment table when the "Delete Appt" button is clicked.
+     * @param evt
      */
     private void deleteApptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteApptActionPerformed
-        try{              
-            // get data from id field                  
+        try{
+            // get data from id field
             int id = 0;
             if (apptIDFieldDelete.getText() !=null)
                 id = Integer.parseInt(apptIDFieldDelete.getText());
-            
+
             // use callDeleteAppt method from DBManager class to perform the update
             database.callDeleteAppt(id);
         }
@@ -1794,20 +1794,20 @@ public class DataFrames extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_deleteApptActionPerformed
-    
+
     /**
      * The updateCountyTaxActionPerformed method updates the tax rate for the
      * selected county when the "Update County Tax" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void updateCountyTaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCountyTaxActionPerformed
-        try{              
-            // get data from county form fields                      
+        try{
+            // get data from county form fields
             double newtax = 0.0;
             if (countyTaxField.getText() !=null)
                     newtax = Double.parseDouble(countyTaxField.getText());
                 String id = countyIDField.getText();
-                
+
             // call method callUpdateCountyTax from DBManager class to update tax rate
             database.callUpdateCountyTax(newtax, id);
             }
@@ -1817,19 +1817,19 @@ public class DataFrames extends javax.swing.JFrame {
 
     }//GEN-LAST:event_updateCountyTaxActionPerformed
     /**
-     * The insertMuniActionPerformed inserts a new municipality into the 
+     * The insertMuniActionPerformed inserts a new municipality into the
      * municipality table when the "Insert Municipality" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void insertMuniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertMuniActionPerformed
-        try{                 
+        try{
             // store data from Municipality form fields into variables
             String id = muniIDField.getText();
             String name = muniNameField.getText();
             double tax = 0.0;
             if (muniTaxField.getText() != null)
                 tax = Double.parseDouble(muniTaxField.getText());
-            
+
             // use callInsertMuni method, with the variables as parameters,
             // to insert a new municipality into the database table
             database.callInsertMuni(id, name, tax);
@@ -1838,20 +1838,20 @@ public class DataFrames extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_insertMuniActionPerformed
-    
+
     /**
-     * The delCountyActionPerformed method deletes a county from the table 
+     * The delCountyActionPerformed method deletes a county from the table
      * when the "Delete County" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void delCountyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delCountyActionPerformed
         try{
-            // get the county ID from the form              
+            // get the county ID from the form
             String id = countyIDField.getText();
-            
+
             // use the callDeleteCounty method to delete the county from the database
             database.callDeleteCounty(id);
-            
+
             }
         catch(Exception e){
             e.printStackTrace();
@@ -1859,18 +1859,18 @@ public class DataFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_delCountyActionPerformed
 
     /**
-     * The deleteMuniActionPerformed deletes a municipality from the municipality 
+     * The deleteMuniActionPerformed deletes a municipality from the municipality
      * table when the "Delete Municipality" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void deleteMuniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMuniActionPerformed
         try{
             // store the municipality ID from the form into a variable
             String id = muniIDField.getText();
-                
+
             // use the callDeleteMuni method to delete the municipality in question
             database.callDeleteMuni(id);
-  
+
             }
         catch(Exception e){
             e.printStackTrace();
@@ -1879,7 +1879,7 @@ public class DataFrames extends javax.swing.JFrame {
     /**
      * The updateSDTaxActionPerformed method updates a school district tax rate
      * when the "Update School District Tax" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void updateSDTaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSDTaxActionPerformed
         try{
@@ -1888,7 +1888,7 @@ public class DataFrames extends javax.swing.JFrame {
             if (schoolDistrictTaxField.getText()!=null)
                 sdTax = Double.parseDouble(schoolDistrictTaxField.getText());
             String sdID = schoolDistrictIDField.getText();
-            
+
             // use DBManager class method callUpdateSDistrictTax to update the
             // tax rate in the database for the selected school district
             database.callUpdateSDistrictTax(sdTax, sdID);
@@ -1896,33 +1896,33 @@ public class DataFrames extends javax.swing.JFrame {
         catch(Exception e){
             e.printStackTrace();
         }
-              
+
     }//GEN-LAST:event_updateSDTaxActionPerformed
     /**
-     * The deleteSDActionPerformed deletes a school district from the 
+     * The deleteSDActionPerformed deletes a school district from the
      * school_district table when the "Delete School District" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void deleteSDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSDActionPerformed
         try{
             // store school district ID from the school district form in a variable
             String sdID = schoolDistrictIDField.getText();
-            
+
             // use callDeleteSDistrict method to delete the school district
             database.callDeleteSDistrict(sdID);
         }
         catch(Exception e){
             e.printStackTrace();
-        }        
+        }
 
     }//GEN-LAST:event_deleteSDActionPerformed
     /**
      * The insertAgentActionPerformed inserts a new agent into the listing_agent
      * table in the database when the "Insert New Agent" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void insertAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertAgentActionPerformed
-        try{                 
+        try{
             // retrieve and store data from agent form
             String id = agentIDField.getText();
             String firstName = firstNameField.getText();
@@ -1930,82 +1930,82 @@ public class DataFrames extends javax.swing.JFrame {
             String agency = agencyField.getText();
             String phone = phoneField.getText();
             String email = emailField.getText();
-            
+
             // use callInsertAgent method to insert a new row into the listing_agent table
             database.callInsertAgent(id, firstName, lastName, agency, phone, email);
-            
+
             }
         catch(Exception e){
             e.printStackTrace();
-        }        
+        }
 
     }//GEN-LAST:event_insertAgentActionPerformed
-    
+
     /**
-     * The updateAgentPhoneActionPerformed method updates the phone number for 
+     * The updateAgentPhoneActionPerformed method updates the phone number for
      * an agent when the "Update agent phone" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void updateAgentPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAgentPhoneActionPerformed
         try{
-            // retrieve and store needed data from the form                  
+            // retrieve and store needed data from the form
             String phone = phoneField.getText();
             String id = agentIDField.getText();
-            
+
             // use DBManager class callUpdateAgent method to update the phone number
             database.callUpdateAgentPhone(phone, id);
-            
+
             }
         catch(Exception e){
             e.printStackTrace();
         }
     }//GEN-LAST:event_updateAgentPhoneActionPerformed
     /**
-     * The updateAgentEmailActionPerformed updates the email address for an 
+     * The updateAgentEmailActionPerformed updates the email address for an
      * agent when the "Update agent email" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void updateAgentEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAgentEmailActionPerformed
          try{
-            // retrieve and store needed data from the agent form                
+            // retrieve and store needed data from the agent form
             String email = emailField.getText();
             String id = agentIDField.getText();
-            
+
             // use callUpdateAgentEmail method to update the email address
             database.callUpdateAgentEmail(email, id);
-            
+
             }
         catch(Exception e){
             e.printStackTrace();
         }
     }//GEN-LAST:event_updateAgentEmailActionPerformed
-    
+
     /**
      * The deleteAgentActionPerformed method deletes an agent when the
      * "Delete agent" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void deleteAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAgentActionPerformed
          try{
-                              
+
             // retrieve and store agent ID from the form
             String id = agentIDField.getText();
-            
+
             // use callDeleteAgent method from DBManager class to delete the agent
             // from the listing_agent table in the database
             database.callDeleteAgent(id);
-            
+
             }
         catch(Exception e){
             e.printStackTrace();
         }
     }//GEN-LAST:event_deleteAgentActionPerformed
     /**
-     * The refreshPropTblActionPerformed method refreshes the Property table when the 
-     * "refreshPropTbl" button is clicked. This method is useful when an update 
-     * has been made to the table, and you would like to display the update in 
+     * The refreshPropTblActionPerformed method refreshes the Property table when the
+     * "refreshPropTbl" button is clicked. This method is useful when an update
+     * has been made to the table, and you would like to display the update in
      * the table and combo boxes.
-     * @param evt 
+     * @param evt
      */
     private void refreshPropTblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshPropTblActionPerformed
         // use createTable method to create the Property table
@@ -2013,22 +2013,22 @@ public class DataFrames extends javax.swing.JFrame {
         // use createComboBoxes method to create the combo boxes
         createComboBoxes();
     }//GEN-LAST:event_refreshPropTblActionPerformed
-    
+
     /**
      * The refreshApptTblActionPerformed method refreshes the Appointment table
-     * and the combo boxes when the "refreshApptTbl" button is clicked. 
-     * @param evt 
+     * and the combo boxes when the "refreshApptTbl" button is clicked.
+     * @param evt
      */
     private void refreshApptTblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshApptTblActionPerformed
         createTable(queryAppt, apptDTM, Appointment);
         createComboBoxes();
     }//GEN-LAST:event_refreshApptTblActionPerformed
-    
+
     /**
      * The clearFieldsPropActionPerformed sets all text in the Property form to
      * a blank string and resets all combo boxes to index 0 (the first item in the list),
      * when the "clearFieldsProp" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void clearFieldsPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFieldsPropActionPerformed
         mlsfield.setText("");
@@ -2051,13 +2051,13 @@ public class DataFrames extends javax.swing.JFrame {
         mlsToDeletecbo.setSelectedIndex(0);
         mlsPropTaxCBO.setSelectedIndex(0);
         propTax.setText("");
-        
+
     }//GEN-LAST:event_clearFieldsPropActionPerformed
-    
+
     /**
      * The clearApptButton method clears the fields in the appointment table
      * when the "clearApptButton" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void clearApptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearApptButtonActionPerformed
         apptDateField.setText("");
@@ -2069,12 +2069,12 @@ public class DataFrames extends javax.swing.JFrame {
         apptIDUpdateTime.setText("");
         apptIDFieldDelete.setText("");
     }//GEN-LAST:event_clearApptButtonActionPerformed
-    
+
     /**
      * The refreshGeoTablesActionPerformed method refreshes the three geographic
-     * tables: county, municipality, school_district, and recreates the combo 
+     * tables: county, municipality, school_district, and recreates the combo
      * boxes, when the refreshGeoTables button is pressed.
-     * @param evt 
+     * @param evt
      */
     private void refreshGeoTablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshGeoTablesActionPerformed
         createTable(queryCounty, countyDTM, County);
@@ -2083,10 +2083,10 @@ public class DataFrames extends javax.swing.JFrame {
         createComboBoxes();
     }//GEN-LAST:event_refreshGeoTablesActionPerformed
     /**
-     * The clearGeoFieldsActionPerformed method clears all of the forms on 
+     * The clearGeoFieldsActionPerformed method clears all of the forms on
      * the "Geography" tab of the GUI--the county, municipality, and school district
      * forms--when the "clearGeoFields" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void clearGeoFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearGeoFieldsActionPerformed
         countyIDField.setText("");
@@ -2099,21 +2099,21 @@ public class DataFrames extends javax.swing.JFrame {
         schoolDistrictNameField.setText("");
         schoolDistrictTaxField.setText("");
     }//GEN-LAST:event_clearGeoFieldsActionPerformed
-    
+
     /**
-     * The refreshAgentTblActionPerformed method recreates the agent table 
+     * The refreshAgentTblActionPerformed method recreates the agent table
      * when the "refreshAgentTbl" button is clicked on the agent tab.
-     * @param evt 
+     * @param evt
      */
     private void refreshAgentTblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshAgentTblActionPerformed
         createTable(queryAgent, agentDTM, ListingAgent);
         createComboBoxes();
     }//GEN-LAST:event_refreshAgentTblActionPerformed
-    
+
     /**
      * The clearAgentFieldsActionPerformed method clears all of the form
      * fields on the agent tab when the "clearAgentFields" button is clicked.
-     * @param evt 
+     * @param evt
      */
     private void clearAgentFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearAgentFieldsActionPerformed
         agentIDField.setText("");
@@ -2123,24 +2123,24 @@ public class DataFrames extends javax.swing.JFrame {
         phoneField.setText("");
         emailField.setText("");
     }//GEN-LAST:event_clearAgentFieldsActionPerformed
-    
+
     /**
      * The calcPropTaxButtonActionPerformed method populates an uneditable
      * text field with the calculated property tax for a selected property.
-     * @param evt 
+     * @param evt
      */
     private void calcPropTaxButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcPropTaxButtonActionPerformed
        // retrieve and store the selected MLS number
        String selectMLS = mlsPropTaxCBO.getSelectedItem().toString();
-       
+
        // 1. call the DBManager class calcProperty tax method to calculate
        // the property tax for the selected property (selectMLS)
        // 2. since the method returns a double, use the String.valueOf method
        // to represent the returned value as a String
-       // 3. set the text of the propTax text field as the method's returned value  
+       // 3. set the text of the propTax text field as the method's returned value
        propTax.setText(String.valueOf(database.calcPropertyTax(selectMLS)));
-       
-       
+
+
     }//GEN-LAST:event_calcPropTaxButtonActionPerformed
 
     /**
@@ -2150,7 +2150,7 @@ public class DataFrames extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -93,7 +93,7 @@ VALUES
 ('COL', 'Colonial', 21.404);
 INSERT INTO SCHOOL_DISTRICT
 VALUES
-('TE', 'Tredyffrin-Easttown', 22.4381);
+('TE', 'Tredyffrin-Easttown', 22.4381);
 INSERT INTO SCHOOL_DISTRICT
 VALUES
 ('LM', 'Lower Merion', 28.074);
@@ -107,14 +107,14 @@ VALUES
 INSERT INTO LISTING_AGENT
 VALUES
 ('GB1', 'George', 'Bartlett', 'BHHS Fox & Roach', '6107777777',
-'customerservice@foxroach.com'); 
+'customerservice@foxroach.com');
 INSERT INTO LISTING_AGENT
 VALUES
 ('JE1', 'Jamie', 'Easton', 'Keller Williams Real Estate', '2155555555',
  'customerservice@kw.com');
 INSERT INTO LISTING_AGENT
 VALUES
-('EL1', 'Erica', 'Land', 'BHHS Fox & Roach', '4844444444', 
+('EL1', 'Erica', 'Land', 'BHHS Fox & Roach', '4844444444',
  'customerservice@foxroach.com');
 INSERT INTO LISTING_AGENT
 VALUES
@@ -144,22 +144,22 @@ VALUES
 INSERT INTO PROPERTY
 VALUES
 ('7166956', 225000, 89520, '561 Summit St', 'King of Prussia', 'MONTCO','UPMER',
-'UM', 3, 1,  1118, '2018-04-23', 'GB1');
+'UM', 3, 1, 1118, '2018-04-23', 'GB1');
 INSERT INTO PROPERTY
 VALUES
 ('1000221588', 279000, 86500, '222 W 7th Ave', 'Conshohocken', 'MONTCO', 'CONSHO',
 'COL', 4, 1.5, 1024, '2018-03-02', 'JE1');
 INSERT INTO PROPERTY
 VALUES
-('7134577', 259000, 91400, '40 Keystone Ave', 'Paoli', 'CHESCO', 'TRED', 
+('7134577', 259000, 91400, '40 Keystone Ave', 'Paoli', 'CHESCO', 'TRED',
 'TE', 3, 1.5, 1152, '2018-02-27', 'EL1');
 INSERT INTO PROPERTY
 VALUES
-('7165048', 198900, 133620, '519 Kenilworth Rd', 'Merion Station', 'MONTCO', 'LMER', 
+('7165048', 198900, 133620, '519 Kenilworth Rd', 'Merion Station', 'MONTCO', 'LMER',
 'LM', 3, 1, 1248, '2018-04-20', 'JD1');
 INSERT INTO PROPERTY
 VALUES
-('1000319788', 285900, 100440, '1507 Colwell Ln', 'Conshohocken', 'MONTCO', 'PLYM', 
+('1000319788', 285900, 100440, '1507 Colwell Ln', 'Conshohocken', 'MONTCO', 'PLYM',
 'COL', 3, 1, 1345,'2018-03-29', 'MK1');
 INSERT INTO PROPERTY
 VALUES
