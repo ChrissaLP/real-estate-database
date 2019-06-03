@@ -20,6 +20,7 @@ In the GUI, the display is divided into 3 tabs:
 (screenshots of each tab are in the docs folder, with some sample data on display)
 
 Further information on each table is included below.
+
  
 **1.	PROPERTY**
 
