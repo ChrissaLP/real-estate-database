@@ -1,32 +1,30 @@
 Documentation
 =============
 
-Database Images
----------------
 
 List of Tables
 --------------
 
 The database has six tables:
 
-1.	PROPERTY (*MLS_NUM*, LISTED_PRICE, ASSESSMENT, ADDRESS, CITY, COUNTY_ID, MUNICIPALITY_ID, SCHOOL_DISTRICT_ID, BEDRMS, BATHRMS, SQR_FT, DATE_ON_MKT, LISTING_AGENT_ID)
-2.	COUNTY (*COUNTY_ID*, COUNTY_NAME, COUNTY_TAX)
-3.	MUNICIPALITY (*MUNICIPALITY_ID*, MUNICIPALITY_NAME, MUNICIPALITY_TAX)
-4.	SCHOOL_DISTRICT (*SCHOOL_DISTRICT_ID*, SCHOOL_DISTRICT_NAME, SCHOOL_DISTRICT_TAX)
-5.	LISTING_AGENT (*LISTING_AGENT_ID*, FIRSTNAME, LASTNAME, AGENCY, PHONE, EMAIL)
-6.	APPOINTMENT (*APPT_ID*, MLS_NUM, APPT_DATE, APPT_TIME, DURATION, TYPE)
+1.	**PROPERTY** (*MLS_NUM*, LISTED_PRICE, ASSESSMENT, ADDRESS, CITY, COUNTY_ID, MUNICIPALITY_ID, SCHOOL_DISTRICT_ID, BEDRMS, BATHRMS, SQR_FT, DATE_ON_MKT, LISTING_AGENT_ID)
+2.	**COUNTY** (*COUNTY_ID*, COUNTY_NAME, COUNTY_TAX)
+3.	**MUNICIPALITY** (*MUNICIPALITY_ID*, MUNICIPALITY_NAME, MUNICIPALITY_TAX)
+4.	**SCHOOL_DISTRICT** (*SCHOOL_DISTRICT_ID*, SCHOOL_DISTRICT_NAME, SCHOOL_DISTRICT_TAX)
+5.	**LISTING_AGENT** (*LISTING_AGENT_ID*, FIRSTNAME, LASTNAME, AGENCY, PHONE, EMAIL)
+6.	**APPOINTMENT** (*APPT_ID*, MLS_NUM, APPT_DATE, APPT_TIME, DURATION, TYPE)
 
 
-In the GUI, the display is divided into 3 tabs:
-1. Property (which includes the Property and Appointment tables)
+*In the GUI, the display is divided into 3 tabs:*
+1. **Property** (which includes the Property and Appointment tables)
 
 ![Property tab](/Images/property.png)
 
-2. Geography (which includes the County, Municipality and School District tables)
+2. **Geography** (which includes the County, Municipality and School District tables)
 
 ![Geography tab](/Images/geography.png)
 
-3. Agent (for the agent table)
+3. **Agent** (for the agent table)
 
 ![Agent tab](/Images/agent.png)
 
