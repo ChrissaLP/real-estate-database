@@ -13,6 +13,7 @@ The database has six tables:
 5.	LISTING_AGENT (*LISTING_AGENT_ID*, FIRSTNAME, LASTNAME, AGENCY, PHONE, EMAIL)
 6.	APPOINTMENT (*APPT_ID*, MLS_NUM, APPT_DATE, APPT_TIME, DURATION, TYPE)
 
+
 In the GUI, the display is divided into 3 tabs:
 1. Property (which includes the Property and Appointment tables)
 2. Geography (which includes the County, Municipality and School District tables)
@@ -21,6 +22,7 @@ In the GUI, the display is divided into 3 tabs:
 
 Further information on each table is included below.
  
+
 **1.	PROPERTY**
 
 -The PROPERTY table stores important information about each property:
@@ -65,8 +67,7 @@ Further information on each table is included below.
 - SCHOOL_DISTRICT_NAME (VARCHAR(45)):	Full school district name.
 - SCHOOL_DISTRICT_TAX	(DECIMAL(6,4)):	Tax rate in mills.
 
- 
-**5.	LISTING_AGENT**
+ **5.	LISTING_AGENT**
 
 - Each listing agent can represent many properties, so this table has a one-to-many relationship with the main PROPERTY table. This table provides basic information, including contact details, about the listing agent for each property.
 
