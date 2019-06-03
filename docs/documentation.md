@@ -21,8 +21,10 @@ In the GUI, the display is divided into 3 tabs:
 
 Further information on each table is included below.
  
-1.	PROPERTY
-The PROPERTY table stores important information about each property:
+**1.	PROPERTY**
+
+-The PROPERTY table stores important information about each property:
+
 - MLS_NUM (VARCHAR(10)):	The MLS (multiple listing service) number for the property, serves as the primary key for the table. Real estate properties are tracked by MLS number, which is generally 7-10 digits.
 - LISTED_PRICE (DECIMAL(6,0)): The listed sale price for the property.
 - ASSESSMENT (DECIMAL(6,0)): The most recent tax assessment of the property value.
@@ -37,36 +39,36 @@ The PROPERTY table stores important information about each property:
 - DATE_ON_MARKET (DATE):	The date the property was entered on the market.
 - LISTING_AGENT_ID (VARCHAR(5)):The ID for the listing agent for the property. Foreign Key (LISTING_AGENT table).
 
-2.	COUNTY (COUNTY_ID, COUNTY_NAME, COUNTY_TAX)
+**2.	COUNTY**
 
-This table provides information on the county tax rate.
+-This table provides information on the county tax rate.
 
 - COUNTY_ID	(VARCHAR(10)):	An ID to indicate the county, and the primary key for the table.
 - COUNTY_NAME	(VARCHAR(45)):	Full county name.
 - COUNTY_TAX	(DECIMAL(6,4)):	Tax rate (in mills). (To calculate property tax based on the millage rate, take that rate, multiply it by the taxable value of the property, then divide the result by 1,000.)
 
 
-3.	MUNICIPALITY (MUNICIPALITY_ID, MUNICIPALITY_NAME, MUNICIPALITY_TAX)
+**3.	MUNICIPALITY**
 
-The MUNICIPALITY table provides information on the municipality tax rate.
+- The MUNICIPALITY table provides information on the municipality tax rate.
 
 - MUNICIPALITY_ID	(VARCHAR(10)):	An ID to indicate the municipality, and the primary key for the table.
 - MUNICIPALITY_NAME	(VARCHAR(45)):	The full name of the municipality.
 - MUNICIPALITY_TAX	(DECIMAL(6,4)):	Tax rate (in mills).
 
 
-4.	SCHOOL_DISTRICT (SCHOOL_DISTRICT_ID, SCHOOL_DISTRICT_NAME, SCHOOL_DISTRICT_TAX)
+**4.	SCHOOL_DISTRICT**
 
-The school district table provides information on the school district tax rate.
+- The school district table provides information on the school district tax rate.
 
 - SCHOOL_DISTRICT_ID (VARCHAR(10)):	An ID to indicate the school district, and the table’s primary key.
 - SCHOOL_DISTRICT_NAME (VARCHAR(45)):	Full school district name.
 - SCHOOL_DISTRICT_TAX	(DECIMAL(6,4)):	Tax rate in mills.
 
  
-5.	LISTING_AGENT (LISTING_AGENT_ID, FIRSTNAME, LASTNAME, AGENCY, PHONE, EMAIL)
+**5.	LISTING_AGENT**
 
-Each listing agent can represent many properties, so this table has a one-to-many relationship with the main PROPERTY table. This table provides basic information, including contact details, about the listing agent for each property.
+- Each listing agent can represent many properties, so this table has a one-to-many relationship with the main PROPERTY table. This table provides basic information, including contact details, about the listing agent for each property.
 
 - LISTING_AGENT_ID	(VARCHAR(5)):	ID for each listing agent, and the table’s primary key.
 - FIRSTNAME	(VARCHAR(45)):	Agent first name.
@@ -75,9 +77,9 @@ Each listing agent can represent many properties, so this table has a one-to-man
 - PHONE	(VARCHAR(10)):	Agent phone number
 - EMAIL	(VARCHAR(45)):	Agent email address.
 
-6.	APPOINTMENT (APPT_ID, APPT_DATE, APPT_TIME, MLS_NUM, DURATION, TYPE)
+**6.	APPOINTMENT**
 
-The appointment table holds scheduled appointments.
+- The appointment table holds scheduled appointments.
 
 - APPT_ID (INT):	The APPT_ID field , an INT, is used for the primary key.
 - APPT_DATE	(DATE):	Indicates the date of the appointment.
@@ -86,6 +88,7 @@ The appointment table holds scheduled appointments.
 - DURATION	(INT):	Indicates the duration of the appointment in minutes. So an appointment lasting one hour would have a DURATION of 60.
 -TYPE	(VARCHAR(45)):	Indicates whether it is a scheduled appointment or an open house.
 
+
 *A note on the source of Data:*
 
 To populate the database, I used publicly available information on different properties from Zillow.com, primarily for properties in Montgomery, Delaware and Chester counties. In addition, for county, municipality, and school district tax rates, I used government resources to determine the appropriate tax rates.
@@ -93,7 +96,7 @@ To populate the database, I used publicly available information on different pro
 Stored Procedures:
 ------------------
 
-###Insert Stored Procedures (insert a record into each of the tables):*
+**Insert Stored Procedures (insert a record into each of the tables):**
 
 1.	usp_INSERT_APPOINTMENT:
 * insert a record into APPOINTMENT table
@@ -120,7 +123,7 @@ Stored Procedures:
 *	user enters information for all fields in SCHOOL_DISTRICT table
 
 
-###Update Stored Procedures (update records in the tables):
+**Update Stored Procedures (update records in the tables):**
 
 1.	usp_UPDATE_AGENT_EMAIL
 *	update a listing agent’s email address in the LISTING_AGENT table
@@ -158,7 +161,8 @@ Stored Procedures:
 *	update the school district tax rate in the SCHOOL_DISTRICT table
 *	parameters: new tax rate and the school district ID
 
-###Delete Stored Procedures (delete selected records from the tables):
+
+**Delete Stored Procedures (delete selected records from the tables):**
 
 1.	usp_DEL_APPOINTMENT
 *	delete an appointment from the APPOINTMENT table
@@ -189,7 +193,8 @@ Stored Procedures:
 *	similar to the “delete” stored procedure for the COUNTY and MUNICIPALITY tables, the field for a deleted school district is set to null in the PROPERTY table when a school district is deleted
 *	parameter: school district ID
 
-###Stored Procedure for a Calculation:
+
+**Stored Procedure for a Calculation:**
 
 1.	usp_CALC_PROP_TAX
 *	this stored procedure calculates the total annual property tax for a selected property in the PROPERTY table (using an inner join to retrieve data from the COUNTY, MUNICIPALITY, and SCHOOL_DISTRICT tables)
