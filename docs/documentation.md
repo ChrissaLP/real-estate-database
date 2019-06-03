@@ -61,7 +61,7 @@ Further information on each table is included below.
 
 **3.	MUNICIPALITY**
 
-- The MUNICIPALITY table provides information on the municipality tax rate.
+-The MUNICIPALITY table provides information on the municipality tax rate.
 
 - MUNICIPALITY_ID	(VARCHAR(10)):	An ID to indicate the municipality, and the primary key for the table.
 - MUNICIPALITY_NAME	(VARCHAR(45)):	The full name of the municipality.
@@ -70,7 +70,7 @@ Further information on each table is included below.
 
 **4.	SCHOOL_DISTRICT**
 
-- The school district table provides information on the school district tax rate.
+-The school district table provides information on the school district tax rate.
 
 - SCHOOL_DISTRICT_ID (VARCHAR(10)):	An ID to indicate the school district, and the table’s primary key.
 - SCHOOL_DISTRICT_NAME (VARCHAR(45)):	Full school district name.
@@ -78,7 +78,7 @@ Further information on each table is included below.
 
  **5.	LISTING_AGENT**
 
-- Each listing agent can represent many properties, so this table has a one-to-many relationship with the main PROPERTY table. This table provides basic information, including contact details, about the listing agent for each property.
+-Each listing agent can represent many properties, so this table has a one-to-many relationship with the main PROPERTY table. This table provides basic information, including contact details, about the listing agent for each property.
 
 - LISTING_AGENT_ID	(VARCHAR(5)):	ID for each listing agent, and the table’s primary key.
 - FIRSTNAME	(VARCHAR(45)):	Agent first name.
@@ -89,7 +89,7 @@ Further information on each table is included below.
 
 **6.	APPOINTMENT**
 
-- The appointment table holds scheduled appointments.
+-The appointment table holds scheduled appointments.
 
 - APPT_ID (INT):	The APPT_ID field , an INT, is used for the primary key.
 - APPT_DATE	(DATE):	Indicates the date of the appointment.
