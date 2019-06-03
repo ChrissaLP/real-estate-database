@@ -4,8 +4,17 @@ Documentation
 Database Images
 ---------------
 
+*Property Tab:*
+
 ![Property tab](/Images/property.png)
+
+
+*Geography Tab:*
+
 ![Geography tab](/Images/geography.png)
+
+*Agent Tab:*
+
 ![Agent tab](/Images/agent.png)
 
 
