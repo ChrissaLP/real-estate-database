@@ -4,20 +4,6 @@ Documentation
 Database Images
 ---------------
 
-*Property Tab:*
-
-![Property tab](/Images/property.png)
-
-
-*Geography Tab:*
-
-![Geography tab](/Images/geography.png)
-
-*Agent Tab:*
-
-![Agent tab](/Images/agent.png)
-
-
 List of Tables
 --------------
 
@@ -33,12 +19,19 @@ The database has six tables:
 
 In the GUI, the display is divided into 3 tabs:
 1. Property (which includes the Property and Appointment tables)
+
+![Property tab](/Images/property.png)
+
 2. Geography (which includes the County, Municipality and School District tables)
+
+![Geography tab](/Images/geography.png)
+
 3. Agent (for the agent table)
-(screenshots of each tab are in the docs folder, with some sample data on display)
+
+![Agent tab](/Images/agent.png)
+
 
 Further information on each table is included below.
-
  
 
 **1.	PROPERTY**
